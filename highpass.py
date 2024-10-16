@@ -57,9 +57,12 @@ numtaps = 175        # Size of the FIR filter.
 edges = [0, band[0] - trans_width, band[0], band[1],
          band[1] + trans_width, 0.5*fs]
 taps = signal.remez(numtaps, edges, [1, 0, 1], fs=fs)
-with open ("remes_bs.coef","w") as outf:
-    for t in taps:
-        outf.write(f"{t:g} , ")
+with open("remes_bs.coef", "w") as outf:
+    for i, t in enumerate(taps):
+        if i == len(taps) - 1:
+            outf.write(f"{t:g}")
+        else:
+            outf.write(f"{t:g}, ")
 w, h = signal.freqz(taps, [1], worN=2000, fs=fs)
 plot_response(w, h, "Band-stop Filter")
 plt.show()
