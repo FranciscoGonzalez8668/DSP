@@ -59,7 +59,7 @@ edges = [0, band[0] - trans_width, band[0], band[1],
 taps = signal.remez(numtaps, edges, [1, 0, 1], fs=fs)
 with open ("remes_bs.coef","w") as outf:
     for t in taps:
-        outf.write(f"{t:g},")
+        outf.write(f"{t:g} , ")
 w, h = signal.freqz(taps, [1], worN=2000, fs=fs)
 plot_response(w, h, "Band-stop Filter")
 plt.show()
